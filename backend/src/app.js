@@ -19,14 +19,14 @@ app.use('/api/scores',  scoreRoutes);
 app.use('/api/reports', reportRoutes);
 
 app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint khong ton tai' });
+  res.status(404).json({ error: 'Endpoint not found' });
 });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Loi server. Vui long thu lai.' });
+  res.status(500).json({ error: 'Internal server error. Please try again.' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server chay tai http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

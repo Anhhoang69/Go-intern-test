@@ -1,15 +1,15 @@
 class SubjectManager {
   constructor() {
     this.subjects = [
-      { key: 'toan',      label: 'Toan' },
-      { key: 'ngu_van',   label: 'Ngu Van' },
-      { key: 'ngoai_ngu', label: 'Ngoai Ngu' },
-      { key: 'vat_li',    label: 'Vat Li' },
-      { key: 'hoa_hoc',   label: 'Hoa Hoc' },
-      { key: 'sinh_hoc',  label: 'Sinh Hoc' },
-      { key: 'lich_su',   label: 'Lich Su' },
-      { key: 'dia_li',    label: 'Dia Li' },
-      { key: 'gdcd',      label: 'GDCD' },
+      { key: 'toan',      label: 'Mathematics' },
+      { key: 'ngu_van',   label: 'Literature' },
+      { key: 'ngoai_ngu', label: 'Foreign Language' },
+      { key: 'vat_li',    label: 'Physics' },
+      { key: 'hoa_hoc',   label: 'Chemistry' },
+      { key: 'sinh_hoc',  label: 'Biology' },
+      { key: 'lich_su',   label: 'History' },
+      { key: 'dia_li',    label: 'Geography' },
+      { key: 'gdcd',      label: 'Civic Education' },
     ];
 
     this.groupAKeys = ['toan', 'vat_li', 'hoa_hoc'];

@@ -1,0 +1,44 @@
+.search-card { margin-bottom: 1.5rem; }
+
+.search-form__label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.search-form__row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.search-form__input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.search-form__input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.error-card {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  color: #c53030;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-icon { font-size: 1.1rem; }
