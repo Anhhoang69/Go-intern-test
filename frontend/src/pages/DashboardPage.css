@@ -33,7 +33,6 @@
   margin-bottom: 1.25rem;
 }
 
-/* Các biến thể màu phẳng cho wrapper của icon */
 .dash-card--blue .dash-card__icon-wrapper   { background-color: #eff6ff; color: #2563eb; }
 .dash-card--green .dash-card__icon-wrapper  { background-color: #f0fdf4; color: #16a34a; }
 .dash-card--yellow .dash-card__icon-wrapper { background-color: #fffbeb; color: #d97706; }

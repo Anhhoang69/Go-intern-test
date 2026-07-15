@@ -4,13 +4,53 @@
   left: 0;
   width: var(--sidebar-w);
   height: 100vh;
-  background-color: #0f172a; /* Flat Slate 900 */
+  background-color: #0f172a;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   z-index: 100;
   transition: width 0.25s ease;
   overflow: hidden;
   border-right: 1px solid #1e293b;
+}
+
+.sidebar__lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-top: 1px solid #1e293b;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.sidebar__lang-icon {
+  flex-shrink: 0;
+}
+
+.sidebar__lang-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  transition: color 0.15s;
+}
+
+.sidebar__lang-btn:hover {
+  color: #f8fafc;
+}
+
+.sidebar__lang-btn--active {
+  color: #3b82f6;
+}
+
+.sidebar__lang-divider {
+  user-select: none;
+  color: #334155;
 }
 
 .sidebar__logo {
@@ -19,7 +59,7 @@
   gap: 0.6rem;
   padding: 1.5rem 1.25rem 1rem;
   border-bottom: 1px solid #1e293b;
-  color: #3b82f6; /* Blue 500 */
+  color: #3b82f6;
 }
 
 .sidebar__logo-icon {
@@ -46,7 +86,7 @@
   gap: 0.75rem;
   padding: 0.75rem 0.85rem;
   border-radius: 8px;
-  color: #94a3b8; /* Slate 400 */
+  color: #94a3b8;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -55,12 +95,12 @@
 }
 
 .sidebar__link:hover {
-  background-color: #1e293b; /* Slate 800 */
+  background-color: #1e293b;
   color: #f8fafc;
 }
 
 .sidebar__link--active {
-  background-color: #2563eb; /* Blue 600 flat */
+  background-color: #2563eb;
   color: #ffffff;
   font-weight: 600;
 }
@@ -97,11 +137,14 @@
 
 @media (max-width: 1024px) {
   .sidebar__logo-text,
-  .sidebar__label { display: none; }
+  .sidebar__label,
+  .sidebar__lang-btn,
+  .sidebar__lang-divider { display: none; }
 
   .sidebar__logo { justify-content: center; padding: 1.25rem 0; }
   .sidebar__link { justify-content: center; padding: 0.85rem 0; }
   .sidebar__nav  { padding: 1rem 0.5rem; }
+  .sidebar__lang-toggle { justify-content: center; padding: 1.25rem 0; }
 }
 
 @media (max-width: 768px) {
@@ -117,9 +160,12 @@
   .sidebar--open { transform: translateX(0); }
 
   .sidebar__logo-text,
-  .sidebar__label { display: inline; }
+  .sidebar__label,
+  .sidebar__lang-btn,
+  .sidebar__lang-divider { display: inline; }
 
   .sidebar__logo { justify-content: flex-start; padding: 1.5rem 1.25rem 1rem; }
   .sidebar__link { justify-content: flex-start; padding: 0.75rem 0.85rem; }
   .sidebar__nav  { padding: 1rem 0.75rem; }
+  .sidebar__lang-toggle { justify-content: flex-start; padding: 1.25rem; }
 }

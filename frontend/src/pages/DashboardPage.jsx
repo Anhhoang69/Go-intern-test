@@ -1,38 +1,39 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Search, BarChart3, Trophy } from 'lucide-react';
 import './DashboardPage.css';
 
 const cards = [
   {
-    to:    '/search',
-    icon:  Search,
-    title: 'Search Scores',
-    desc:  'Enter registration number to view detailed exam scores',
-    color: 'blue',
+    to:      '/search',
+    icon:    Search,
+    titleKey: 'searchScores',
+    descKey:  'searchDesc',
+    color:   'blue',
   },
   {
-    to:    '/reports',
-    icon:  BarChart3,
-    title: 'Statistics',
-    desc:  'Score distribution charts across 4 performance levels',
-    color: 'green',
+    to:      '/reports',
+    icon:    BarChart3,
+    titleKey: 'reports',
+    descKey:  'reportsDesc',
+    color:   'green',
   },
   {
-    to:    '/top10',
-    icon:  Trophy,
-    title: 'Top 10 Group A',
-    desc:  'View the list of 10 students with the highest Group A total scores',
-    color: 'yellow',
+    to:      '/top10',
+    icon:    Trophy,
+    titleKey: 'top10',
+    descKey:  'top10Desc',
+    color:   'yellow',
   },
 ];
 
 export default function DashboardPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="page">
-      <h1 className="page__title">Dashboard</h1>
-      <p className="page__subtitle">
-        High School Graduation Exam 2024 Score Portal
-      </p>
+      <h1 className="page__title">{t('dashboard')}</h1>
+      <p className="page__subtitle">{t('subTitle')}</p>
 
       <div className="dashboard-grid">
         {cards.map((card) => {
@@ -42,8 +43,8 @@ export default function DashboardPage() {
               <div className="dash-card__icon-wrapper">
                 <Icon size={24} className="dash-card__icon" />
               </div>
-              <h2 className="dash-card__title">{card.title}</h2>
-              <p className="dash-card__desc">{card.desc}</p>
+              <h2 className="dash-card__title">{t(card.titleKey)}</h2>
+              <p className="dash-card__desc">{t(card.descKey)}</p>
             </Link>
           );
         })}

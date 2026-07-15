@@ -35,7 +35,11 @@ class SubjectManager {
       score: student[key],
       level: student[key] !== null ? this.classifyScore(student[key]) : null,
     }));
-    return { sbd: student.sbd, scores };
+    return {
+      sbd: student.sbd,
+      ma_ngoai_ngu: student.ma_ngoai_ngu,
+      scores
+    };
   }
 
   calcGroupATotal(student) {

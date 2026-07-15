@@ -41,4 +41,4 @@
   gap: 0.5rem;
 }
 
-.error-icon { font-size: 1.1rem; }
+.error-icon { flex-shrink: 0; }

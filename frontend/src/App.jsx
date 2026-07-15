@@ -1,15 +1,28 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Sidebar       from './components/Sidebar';
 import DashboardPage from './pages/DashboardPage';
 import SearchPage    from './pages/SearchPage';
 import './App.css';
 
 function ReportPlaceholder() {
-  return <div className="page"><h1>Report Statistics</h1><p>Chart configuration is in progress...</p></div>;
+  const { t } = useTranslation();
+  return (
+    <div className="page">
+      <h1>{t('reports')}</h1>
+      <p>{t('underConstruction')}</p>
+    </div>
+  );
 }
 
 function Top10Placeholder() {
-  return <div className="page"><h1>Top 10 Group A</h1><p>Top list analysis is in progress...</p></div>;
+  const { t } = useTranslation();
+  return (
+    <div className="page">
+      <h1>{t('top10')}</h1>
+      <p>{t('underConstruction')}</p>
+    </div>
+  );
 }
 
 export default function App() {
