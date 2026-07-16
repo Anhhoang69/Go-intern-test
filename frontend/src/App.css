@@ -32,6 +32,10 @@ body {
   min-height: 100vh;
 }
 
+.page {
+  max-width: 1200px;
+}
+
 .page__title {
   font-size: 1.75rem;
   font-weight: 700;

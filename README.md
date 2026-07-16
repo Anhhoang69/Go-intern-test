@@ -1,65 +1,88 @@
 # G-Scores
 
-This is the instruction for web developer intern assignment at [Golden Owl](https://goldenowl.asia). You will build a simple web.
+High School Graduation Exam 2024 Score Portal. This web application allows students to lookup their scores, view statistics on score distributions, and check the top 10 ranked students of Group A.
 
-Web template example. Hope you will make it more beautiful !!!
+## Features
+- **Score Lookup**: Enter registration number (SBD) to get instant detailed results (with Vietnamese/English language toggle support).
+- **Reports (Charts)**: View color-coded score distribution stats across 4 levels (Excellent `>=8`, Good `6-8`, Average `4-6`, Weak `<4`) for all 9 subjects.
+- **Top 10 Group A**: Displays the top 10 students ranked by total Group A score (Mathematics, Physics, Chemistry).
+- **Responsive Layout**: Works seamlessly on Mobile, Tablet, and Desktop screens.
+- **Dockerized Setup**: Quick local deployment using Docker Compose.
 
-![template example](./screenshots/mockup-ui.png) 
-# Requirements
-1. From the raw data file ([diem_thi_thpt_2024.csv](./dataset/diem_thi_thpt_2024.csv)) save it into the database with the appropriate structure
+---
 
-2. Your application should have at least features in [Must have](#must-have), things in [Nice to have](#nice-to-have) is optional (but yeah, it's attractive if you have).
+## Technical Stack
+- **Frontend**: React 18, Vite, Recharts, Lucide Icons, Vanilla CSS
+- **Backend**: Express, Node.js, Prisma ORM, `pg` (PostgreSQL Client Pool)
+- **Database**: PostgreSQL (Supabase)
 
-### Must have:
-- The conversion of raw data into the database must be coded and located in this source code. (**hint**: recommend use migration and seeder)
-- Write a feature to check score from registration number input
-- Write a feature report. There will be 4 levels including: >=8 points, 8 points > && >=6 points, 6 points > && >= 4 points, < 4 points
-    - Statistics of the number of students with scores in the above 4 levels by subjects. (Chart)
-- List top 10 students of group A including (math, physics, chemistry)
-### Nice to have:
+---
 
-- Responsive design (look good on all devices: desktops, tablets & mobile phones).
-- Setup project use Docker.
-- Deploy the application to go live.
+## Getting Started
 
-# Technical Requirements
+### Prerequisites
+- Node.js (v18 or above)
+- npm or yarn
+- Docker (optional, for containerized run)
 
-### Frontend
-You can use any front-end library/framework like React, Angular, Vue, ... or just simple things with HTML + CSS + Javascript (JQuery).
-- For JS intern use React you need to have: 
-  * React Hooks
-- Fonts (optional);
-  - [https://fonts.google.com/specimen/Rubik?query=Rubik](https://fonts.google.com/specimen/Rubik?query=Rubik)
-- You can use some available interfaces such as: [AdminLTe](https://adminlte.io/), [TailAdmin](https://tailadmin.com/)...
-  
-### Backend: 
-Choose one of your applied back-end libraries/frameworks: Maybe Laravel(PHP), Ruby on Rails, NestJS (NodeJs), Django (Python), unlimited framework... or a structure that you come up with yourselt. 
-- **Mandatory** use of **OOP programming** for managing subjects.
-- Need form validation and logic tightening.
-- For NodeJs, use TypeScript is a plus.
-- Use ORM for interacting with Database.
-- Database: You can use postgreSQL, Mysql, mongoDB... to manage or cache the data. 
+### Environmental Variables Setup
 
-### Deployment
-Some providers allow free deployment for the trial version  (note: Maybe some suppliers will update their policies and prices)
+#### Backend (`/backend/.env`)
+Create a `.env` file in the `/backend` directory based on `.env.example`:
+```env
+DATABASE_URL="postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres?pgbouncer=true"
+PGPOOL_URL="postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres"
+PORT=3000
+```
+*(Note: `PGPOOL_URL` must have the password correctly URL-encoded and exclude the `?pgbouncer=true` parameter so the raw query pool client parses it correctly)*
 
-- Heroku - https://heroku.com - Deploying Front & Backend
-- Vercel (Zeit) - https://vercel.com - Deploying Front & Backend apps at free of cost
-- Fly - https://fly.io - Deploying Front & Backend apps at free of cost
-- Deta - https://deta.sh - Deploying Node.js and Python apps and APIs. They support most web frameworks like Express, Koa, Flask, and FastAPI. They also provide a very fast and powerful NoSQL database for free.
-- Heliohost - https://heliohost.org - PHP, Ruby on rails, perl, django, java(jsp)
-- `...`
-# Submission
+#### Frontend (`/frontend/.env`)
+Create a `.env` file in the `/frontend` directory:
+```env
+VITE_API_URL=http://localhost:3000
+```
 
-After completing the assignment, please push the source code to remote repository (github/gitlab), then send us the link to your repository.
+---
 
-Don't forget to add `README.md` which includes guide to run your project locally and demo link.
+## Running Locally
 
+### Option 1: Standard Run
 
-**GOOD LUCK!!!**
+#### 1. Setup Backend
+```bash
+cd backend
+npm install
+npx prisma db push
+node prisma/seed.js   # Seed raw dataset (~1M students) to DB (takes 10-15m)
+npm run dev
+```
 
-![Your Code Work](./screenshots/meme.png)
+#### 2. Setup Frontend
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-# Contributors
+---
 
-- Edric Cao (from GO)
+### Option 2: Run with Docker Compose
+
+Ensure Docker is running, then execute the following command at the project root directory:
+```bash
+docker-compose up --build
+```
+The frontend will be available at [http://localhost](http://localhost) and backend at [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Implementation Details
+
+### OOP Design Principle
+A class `SubjectManager` encapsulating properties like subjects config list and formatting methods (e.g. `classifyScore`, `formatStudent`) is utilized as a single source of truth across controller/service layers to strictly follow Object-Oriented Programming (OOP) requirements.
+
+### Database Query Optimization (Supabase Free Tier)
+To bypass connection constraints on Supabase Free Tier, the application implements:
+1. **Connection Routing**: Normal CRUD uses Prisma via PgBouncer. Heavy statistical analytics query runs via raw PostgreSQL aggregate queries using `pg` Pool directly.
+2. **In-Memory Cache & Warmup**: The app pre-computes and caches statistics upon startup to deliver instant responses to the client while keeping the DB connection pool footprint safe.

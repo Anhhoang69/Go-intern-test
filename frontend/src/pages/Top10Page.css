@@ -1,0 +1,29 @@
+.top10-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rank-cell { font-size: 1.1rem; }
+
+.top-row td { font-weight: 600; }
+
+.total-cell { color: var(--primary); }
+
+.status-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+
+.status-text--error { color: #dc2626; }
+
+@media (min-width: 1200px) {
+  .top10-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .top10-layout .card:first-child { flex: 1.2; }
+  .top10-layout .card:last-child  { flex: 1; }
+}

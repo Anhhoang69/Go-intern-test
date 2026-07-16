@@ -12,13 +12,8 @@ class SubjectManager {
       { key: 'gdcd',      label: 'Civic Education' },
     ];
 
-    this.groupAKeys = ['toan', 'vat_li', 'hoa_hoc'];
   }
 
-  getLabel(key) {
-    const found = this.subjects.find((s) => s.key === key);
-    return found ? found.label : key;
-  }
 
   classifyScore(score) {
     if (score === null || score === undefined) return null;
@@ -42,9 +37,6 @@ class SubjectManager {
     };
   }
 
-  calcGroupATotal(student) {
-    return this.groupAKeys.reduce((sum, key) => sum + (student[key] ?? 0), 0);
-  }
 }
 
 module.exports = SubjectManager;

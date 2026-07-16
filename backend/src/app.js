@@ -29,4 +29,11 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+
+  const { getScoreStats, getTop10GroupA } = require('./services/reportService');
+  console.log('Warming up report cache...');
+  Promise.all([getScoreStats(), getTop10GroupA()])
+    .then(() => console.log('Report cache ready.'))
+    .catch((e) => console.error('Cache warmup failed:', e.message));
 });
+
