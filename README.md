@@ -2,19 +2,41 @@
 
 High School Graduation Exam 2024 Score Portal. This web application allows students to lookup their scores, view statistics on score distributions, and check the top 10 ranked students of Group A.
 
+## Live Demo & Deployed URLs
+- **Live Demo (Frontend)**: [https://go-intern-test.vercel.app/](https://go-intern-test.vercel.app/)
+- **Live Backend API**: [https://go-intern-test-zt8l.onrender.com](https://go-intern-test-zt8l.onrender.com)
+
+---
+
 ## Features
 - **Score Lookup**: Enter registration number (SBD) to get instant detailed results (with Vietnamese/English language toggle support).
 - **Reports (Charts)**: View color-coded score distribution stats across 4 levels (Excellent `>=8`, Good `6-8`, Average `4-6`, Weak `<4`) for all 9 subjects.
-- **Top 10 Group A**: Displays the top 10 students ranked by total Group A score (Mathematics, Physics, Chemistry).
+- **Top 10 Group A**: Displays the top 10 students ranked by total Group A score (Mathematics, Physics, Chemistry) along with score comparison chart.
 - **Responsive Layout**: Works seamlessly on Mobile, Tablet, and Desktop screens.
 - **Dockerized Setup**: Quick local deployment using Docker Compose.
 
 ---
 
 ## Technical Stack
-- **Frontend**: React 18, Vite, Recharts, Lucide Icons, Vanilla CSS
+- **Frontend**: React 18, Vite, Recharts, Lucide Icons, Vanilla CSS, i18next (Localization)
 - **Backend**: Express, Node.js, Prisma ORM, `pg` (PostgreSQL Client Pool)
 - **Database**: PostgreSQL (Supabase)
+
+---
+
+## Application Mockups & Screenshots
+
+### 1. Dashboard Page
+![Dashboard](./screenshots/dashboard.png)
+
+### 2. Score Lookup Page (Search)
+![Search Scores](./screenshots/search.png)
+
+### 3. Reports & Score Distribution Statistics Page
+![Reports Statistics](./screenshots/reports.png)
+
+### 4. Top 10 Group A Rankings Page
+![Top 10 Group A](./screenshots/top10.png)
 
 ---
 
@@ -30,8 +52,8 @@ High School Graduation Exam 2024 Score Portal. This web application allows stude
 #### Backend (`/backend/.env`)
 Create a `.env` file in the `/backend` directory based on `.env.example`:
 ```env
-DATABASE_URL="postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres?pgbouncer=true"
-PGPOOL_URL="postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres"
+DATABASE_URL="postgresql://postgres.sewonomxuehscwoexydq:Anhhoang69@@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+PGPOOL_URL="postgresql://postgres.sewonomxuehscwoexydq:Anhhoang69%40@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres"
 PORT=3000
 ```
 *(Note: `PGPOOL_URL` must have the password correctly URL-encoded and exclude the `?pgbouncer=true` parameter so the raw query pool client parses it correctly)*
